@@ -1,8 +1,18 @@
-import React from 'react';
-import {ButtonGeniusDefault} from '../../components/ButtonsGenius/styled';
-import {TextTitle, ViewBox, ViewBoxContainer, ViewBoxGame} from './styled';
+import React, {useContext} from 'react';
+import {
+  TextTitle,
+  ViewBox,
+  ViewBoxContainer,
+  ViewBoxGame,
+  ViewCenterBox,
+  ViewBoxTexts,
+} from './styled';
+import {LogicGeniusContext} from '../../providers/LogicGenius/logicGenius';
+import ButtonGenius from '../../components/ButtonsGenius';
 
 const HomeGame = () => {
+  const {state} = useContext(LogicGeniusContext);
+  console.log(state);
   return (
     <ViewBoxContainer>
       <TextTitle>Genius Singu</TextTitle>
@@ -10,11 +20,13 @@ const HomeGame = () => {
         <TextTitle>Reservado</TextTitle>
       </ViewBox>
       <ViewBoxGame>
-        <ButtonGeniusDefault color="#ff6f6f" title="1" />
-        <ButtonGeniusDefault color="#80ff86" title="2" />
-        <ButtonGeniusDefault color="#e0ff6e" title="3" />
-        <ButtonGeniusDefault color="#8afbff" title="4" />
+        <ButtonGenius rotate={0} color="#ff6f6f" code="1" />
+        <ButtonGenius rotate={90} color="#80ff86" code="2" />
+        <ViewCenterBox />
+        <ButtonGenius rotate={270} color="#e0ff6e" code="3" />
+        <ButtonGenius rotate={180} color="#8afbff" code="4" />
       </ViewBoxGame>
+      <ViewBoxTexts />
     </ViewBoxContainer>
   );
 };
