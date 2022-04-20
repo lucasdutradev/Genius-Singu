@@ -1,6 +1,6 @@
 import React from 'react';
-import HomeGame from './pages/Home';
-import Provider from './providers';
+import HomeGame from './app/pages/Home';
+import Provider from './app/providers';
 
 // import {
 //   Colors,

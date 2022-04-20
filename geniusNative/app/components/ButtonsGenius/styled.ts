@@ -3,10 +3,11 @@ import styled from 'styled-components/native';
 interface Props {
   changeColor: string;
   rotate: number;
+  isActive: boolean;
 }
 
 export const ButtonGeniusDefault = styled.TouchableOpacity`
-  background-color: ${(p: Props) => p.changeColor};
+  background-color: ${(p: Props) => (p.isActive ? '#fff' : p.changeColor)};
   width: 150px;
   height: 150px;
   border-top-left-radius: 1000px;
