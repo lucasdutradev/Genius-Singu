@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import Sound from 'react-native-sound';
 import {
   TextTitle,
   ViewBox,
@@ -8,17 +7,18 @@ import {
   ViewCenterBox,
   ViewBoxTexts,
   ImageLogo,
+  ViewAwaitSequence,
 } from './styled';
 import {LogicGeniusContext} from '../../providers/LogicGenius/logicGenius';
 import ButtonGenius from '../../components/ButtonsGenius';
 import {Button} from 'react-native';
 
 const HomeGame = () => {
-  Sound.setCategory('Playback');
   const {computerSequence, sequenceWin, userClick} =
     useContext(LogicGeniusContext);
   const [wave, setWave] = useState(0);
   const [fail, setFail] = useState(false);
+  const [awaitGame, setAwaitGame] = useState(false);
   const [buttons, setButtons] = useState([
     {rotate: 0, color: '#ff6f6f', code: 1, isActive: false},
     {rotate: 90, color: '#80ff86', code: 2, isActive: false},
@@ -26,18 +26,25 @@ const HomeGame = () => {
     {rotate: 180, color: '#8afbff', code: 3, isActive: false},
   ]);
 
-  const GameOver = () => {
+  const gameOver = () => {
     console.log('voce perdeu');
     setWave(0);
     computerSequence(true);
+  };
+
+  const handleAwait = () => {
+    setTimeout(() => {
+      setAwaitGame(false);
+    }, 1000 * sequenceWin.length);
   };
 
   const stopCall = () => {
     setTimeout(() => {
       const clickCompt = buttons.map(butt => ({...butt, isActive: false}));
       setButtons(clickCompt);
-    }, 750);
+    }, 650);
   };
+  console.log(awaitGame);
 
   useEffect(() => {
     const clickVerif = userClick.length - 1;
@@ -46,11 +53,13 @@ const HomeGame = () => {
       computerSequence(false);
     }
     if (userClick[clickVerif] !== sequenceWin[clickVerif]) {
-      GameOver();
+      gameOver();
     }
   }, [userClick]);
 
   useEffect(() => {
+    setAwaitGame(true);
+    handleAwait();
     sequenceWin.forEach((buttonNun, i) => {
       setTimeout(() => {
         const clickCompt = buttons.map(butt => {
@@ -74,8 +83,9 @@ const HomeGame = () => {
       </ViewBox>
       <ViewBoxGame>
         <ViewCenterBox>
-          <ImageLogo source={require('../../images/logo.png')} />
+          {/* <ImageLogo source={require('../../images/logo.png')} /> */}
         </ViewCenterBox>
+        {awaitGame && <ViewAwaitSequence />}
         {buttons.map(btn => (
           <ButtonGenius
             rotate={btn.rotate}

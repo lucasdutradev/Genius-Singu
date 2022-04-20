@@ -16,6 +16,15 @@ export const ViewBoxContainer = styled.View`
   background-color: #fff;
 `;
 
+export const ViewAwaitSequence = styled.View`
+  flex: 1;
+  background-color: transparent;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1030;
+`;
+
 export const ViewBoxGame = styled.View`
   flex: 1.7;
   flex-flow: row wrap;
