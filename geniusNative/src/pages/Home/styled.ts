@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
-// #ff9c66
 export const TextTitle = styled.Text`
-  color: #000;
+  color: #ff7a66;
   text-align: center;
   margin-top: 5%;
   font-size: 36px;
   font-weight: bold;
   letter-spacing: 3px;
+  text-transform: uppercase;
 `;
 
 export const ViewBoxContainer = styled.View`
@@ -74,4 +74,5 @@ export const ViewBoxTexts = styled.View`
   flex-direction: column;
   align-items: center;
   background-color: #fff;
+  margin-top: 10px;
 `;

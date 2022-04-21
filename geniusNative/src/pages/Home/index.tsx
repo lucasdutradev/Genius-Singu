@@ -12,7 +12,7 @@ import {
 } from './styled';
 import {LogicGeniusContext} from '../../providers/LogicGenius/logicGenius';
 import ButtonGenius from '../../components/ButtonsGenius';
-import {Button} from 'react-native';
+import ButtonDefault from '../../components/ButtonDefault';
 
 const HomeGame = ({navigation}: any) => {
   const {
@@ -51,7 +51,7 @@ const HomeGame = ({navigation}: any) => {
       {fail && (
         <ViewBoxOver>
           <TextTitle>Game Over!</TextTitle>
-          <Button title="Resetar" onPress={() => initGame()} />
+          <ButtonDefault title="Resetar" onPress={() => initGame()} />
         </ViewBoxOver>
       )}
       <ViewBox>
@@ -74,7 +74,7 @@ const HomeGame = ({navigation}: any) => {
         ))}
       </ViewBoxGame>
       <ViewBoxTexts>
-        <Button
+        <ButtonDefault
           title="Back Menu"
           onPress={() => navigation.navigate('Start')}
         />

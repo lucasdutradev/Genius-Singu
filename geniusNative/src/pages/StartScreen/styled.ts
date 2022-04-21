@@ -19,7 +19,10 @@ export const ViewBoxTextStartGame = styled.View`
   align-items: center;
 `;
 
-export const ImageBoxStartGame = styled.Image``;
+export const ImageBoxStartGame = styled.Image`
+  width: 55px;
+  height: 55px;
+`;
 
 export const TextBoxStartGame = styled.Text`
   color: #ff7a66;
