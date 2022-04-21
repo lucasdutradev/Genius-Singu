@@ -2,16 +2,20 @@ import React, {createContext, useState} from 'react';
 
 interface PropsContext {
   userClick: Array<number>;
-  setUserClick: React.Dispatch<React.SetStateAction<Array<number>>>;
   sequenceWin: Array<number>;
+  wave: number;
+  setUserClick: React.Dispatch<React.SetStateAction<Array<number>>>;
   setSequenceWin: (arr: Array<number>) => void;
+  setWave: (numb: number) => void;
   computerSequence: (reset: boolean) => void;
 }
 
 const DefaultValue = {
   userClick: [],
-  setUserClick: () => {},
   sequenceWin: [],
+  wave: 0,
+  setWave: () => {},
+  setUserClick: () => {},
   setSequenceWin: () => {},
   computerSequence: () => {},
 };
@@ -21,6 +25,7 @@ export const LogicGeniusContext = createContext<PropsContext>(DefaultValue);
 export const LogicGeniusProvider: React.FC = ({children}) => {
   const [userClick, setUserClick] = useState<Array<number>>([]);
   const [sequenceWin, setSequenceWin] = useState<Array<number>>([]);
+  const [wave, setWave] = useState<number>(0);
 
   const computerSequence = (reset: boolean) => {
     setUserClick([]);
@@ -39,6 +44,8 @@ export const LogicGeniusProvider: React.FC = ({children}) => {
         computerSequence,
         sequenceWin,
         setSequenceWin,
+        wave,
+        setWave,
       }}>
       {children}
     </LogicGeniusContext.Provider>

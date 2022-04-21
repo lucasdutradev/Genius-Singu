@@ -1,19 +1,41 @@
 import React from 'react';
-import HomeGame from './app/pages/Home';
-import Provider from './app/providers';
+import HomeGame from './src/pages/Home';
+import StartScreen from './src/pages/StartScreen';
+import Provider from './src/providers';
 
-// import {
-//   Colors,
-//   DebugInstructions,
-//   Header,
-//   LearnMoreLinks,
-//   ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Splash from './src/pages/splash';
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <Provider>
-      <HomeGame />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen
+            name="Splash"
+            component={Splash}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={HomeGame}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Start"
+            component={StartScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 };

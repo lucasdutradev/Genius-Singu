@@ -16,6 +16,18 @@ export const ViewBoxContainer = styled.View`
   background-color: #fff;
 `;
 
+export const ViewBoxOver = styled.View`
+  flex: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+`;
+
 export const ViewAwaitSequence = styled.View`
   flex: 1;
   background-color: transparent;
@@ -26,7 +38,7 @@ export const ViewAwaitSequence = styled.View`
 `;
 
 export const ViewBoxGame = styled.View`
-  flex: 1.7;
+  flex: 1.5;
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
@@ -61,5 +73,5 @@ export const ViewBoxTexts = styled.View`
   flex: 1;
   flex-direction: column;
   align-items: center;
-  background-color: #003049;
+  background-color: #fff;
 `;

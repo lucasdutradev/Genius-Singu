@@ -8,26 +8,22 @@ import {
   ViewBoxTexts,
   ImageLogo,
   ViewAwaitSequence,
+  ViewBoxOver,
 } from './styled';
 import {LogicGeniusContext} from '../../providers/LogicGenius/logicGenius';
 import ButtonGenius from '../../components/ButtonsGenius';
 import {Button} from 'react-native';
+import {AllButtons} from '../../config/buttonsGeniusObj';
 
-const HomeGame = () => {
-  const {computerSequence, sequenceWin, userClick} =
+const HomeGame = ({navigation}: any) => {
+  const {computerSequence, sequenceWin, userClick, wave, setWave} =
     useContext(LogicGeniusContext);
-  const [wave, setWave] = useState(0);
   const [fail, setFail] = useState(false);
   const [awaitGame, setAwaitGame] = useState(false);
-  const [buttons, setButtons] = useState([
-    {rotate: 0, color: '#ff6f6f', code: 1, isActive: false},
-    {rotate: 90, color: '#80ff86', code: 2, isActive: false},
-    {rotate: 270, color: '#e0ff6e', code: 4, isActive: false},
-    {rotate: 180, color: '#8afbff', code: 3, isActive: false},
-  ]);
+  const [buttons, setButtons] = useState(AllButtons);
 
-  const gameOver = () => {
-    console.log('voce perdeu');
+  const initGame = () => {
+    setFail(false);
     setWave(0);
     computerSequence(true);
   };
@@ -44,7 +40,6 @@ const HomeGame = () => {
       setButtons(clickCompt);
     }, 650);
   };
-  console.log(awaitGame);
 
   useEffect(() => {
     const clickVerif = userClick.length - 1;
@@ -53,7 +48,7 @@ const HomeGame = () => {
       computerSequence(false);
     }
     if (userClick[clickVerif] !== sequenceWin[clickVerif]) {
-      gameOver();
+      setFail(true);
     }
   }, [userClick]);
 
@@ -72,22 +67,27 @@ const HomeGame = () => {
         stopCall();
       }, 1000 * i);
     });
-    setFail(false);
-  }, [sequenceWin, fail]);
+  }, [sequenceWin]);
 
   return (
     <ViewBoxContainer>
-      <TextTitle>Genius Singu</TextTitle>
+      {fail && (
+        <ViewBoxOver>
+          <TextTitle>Game Over!</TextTitle>
+          <Button title="Resetar" onPress={() => initGame()} />
+        </ViewBoxOver>
+      )}
       <ViewBox>
         <TextTitle>Level: {wave + 1}</TextTitle>
       </ViewBox>
       <ViewBoxGame>
         <ViewCenterBox>
-          {/* <ImageLogo source={require('../../images/logo.png')} /> */}
+          <ImageLogo source={require('../../images/logo.png')} />
         </ViewCenterBox>
         {awaitGame && <ViewAwaitSequence />}
-        {buttons.map(btn => (
+        {buttons.map((btn, i) => (
           <ButtonGenius
+            key={i}
             rotate={btn.rotate}
             color={btn.color}
             code={btn.code}
@@ -96,7 +96,10 @@ const HomeGame = () => {
         ))}
       </ViewBoxGame>
       <ViewBoxTexts>
-        <Button title="start" onPress={() => computerSequence(true)} />
+        <Button
+          title="Back Menu"
+          onPress={() => navigation.navigate('Start')}
+        />
       </ViewBoxTexts>
     </ViewBoxContainer>
   );
