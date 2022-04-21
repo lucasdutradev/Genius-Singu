@@ -20,6 +20,7 @@ const App = () => {
               headerShown: false,
             }}
           />
+
           <Stack.Screen
             name="Home"
             component={HomeGame}
@@ -27,6 +28,7 @@ const App = () => {
               headerShown: false,
             }}
           />
+
           <Stack.Screen
             name="Start"
             component={StartScreen}

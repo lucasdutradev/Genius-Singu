@@ -1,9 +1,13 @@
 //  Tipando States e funcoes uteis
+
+import Sound from 'react-native-sound';
+
 export interface FullButton {
   color: string;
   code: number;
   rotate: number;
   isActive: boolean;
+  nota: Sound;
 }
 
 export interface PropsContext {

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   TextTitle,
   ViewBox,
@@ -15,8 +15,36 @@ import ButtonGenius from '../../components/ButtonsGenius';
 import {Button} from 'react-native';
 
 const HomeGame = ({navigation}: any) => {
-  const {wave, fail, initGame, awaitGame, buttons} =
-    useContext(LogicGeniusContext);
+  const {
+    wave,
+    fail,
+    initGame,
+    awaitGame,
+    buttons,
+    setAwaitGame,
+    handleAwait,
+    sequenceWin,
+    setButtons,
+    stopCall,
+  } = useContext(LogicGeniusContext);
+
+  useEffect(() => {
+    setAwaitGame(true);
+    handleAwait();
+    sequenceWin.forEach((buttonNun, i) => {
+      setTimeout(() => {
+        const clickCompt = buttons.map(butt => {
+          if (butt.code === buttonNun) {
+            butt.nota.play();
+            return {...butt, isActive: true};
+          }
+          return {...butt, isActive: false};
+        });
+        setButtons(clickCompt);
+        stopCall();
+      }, 1000 * i);
+    });
+  }, [sequenceWin]);
 
   return (
     <ViewBoxContainer>
@@ -41,6 +69,7 @@ const HomeGame = ({navigation}: any) => {
             color={btn.color}
             code={btn.code}
             isActive={btn.isActive}
+            nota={btn.nota}
           />
         ))}
       </ViewBoxGame>

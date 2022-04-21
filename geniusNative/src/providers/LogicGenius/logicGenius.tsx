@@ -57,24 +57,6 @@ export const LogicGeniusProvider: React.FC = ({children}) => {
     }
     userClick[clickVerif] !== sequenceWin[clickVerif] && setFail(true);
   }, [userClick]);
-
-  useEffect(() => {
-    setAwaitGame(true);
-    handleAwait();
-    sequenceWin.forEach((buttonNun, i) => {
-      setTimeout(() => {
-        const clickCompt = buttons.map(butt => {
-          if (butt.code === buttonNun) {
-            return {...butt, isActive: true};
-          }
-          return {...butt, isActive: false};
-        });
-        setButtons(clickCompt);
-        stopCall();
-      }, 1000 * i);
-    });
-  }, [sequenceWin]);
-
   // --------------------------------------------
 
   // Retornando os valores para utilizar nos meus Components e Pages.
