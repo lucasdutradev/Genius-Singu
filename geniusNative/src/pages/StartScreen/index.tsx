@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 
 import {
   ViewBoxContain,
@@ -10,9 +10,17 @@ import {
 } from './styled';
 import ButtonDefault from '../../components/ButtonDefault';
 import {LogicGeniusContext} from '../../providers/LogicGenius/logicGenius';
+import {BackHandler} from 'react-native';
 
 const StartScreen = ({navigation}: any) => {
   const {initGame} = useContext(LogicGeniusContext);
+
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
+      return true;
+    });
+  }, []);
+
   return (
     <ViewBoxContain>
       <ViewBoxStartGame>

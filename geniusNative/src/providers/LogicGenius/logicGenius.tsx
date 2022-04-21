@@ -19,6 +19,7 @@ export const LogicGeniusProvider: React.FC = ({children}) => {
   // criando as funcoes principais --------------
   const computerSequence = (reset: boolean) => {
     setUserClick([]);
+
     if (reset) {
       setSequenceWin([Math.floor(Math.random() * 4 + 1)]);
     } else {
