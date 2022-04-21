@@ -1,12 +1,36 @@
-import React from 'react';
+import React, {useContext} from 'react';
 
-import {View, Button} from 'react-native';
+import {
+  ViewBoxContain,
+  ViewBoxStartGame,
+  TextBoxStartGame,
+  TextBoxFootGame,
+  ViewBoxTextStartGame,
+  ImageBoxStartGame,
+} from './styled';
+import ButtonDefault from '../../components/ButtonDefault';
+import {LogicGeniusContext} from '../../providers/LogicGenius/logicGenius';
 
 const StartScreen = ({navigation}: any) => {
+  const {initGame} = useContext(LogicGeniusContext);
   return (
-    <View>
-      <Button title="Start Game" onPress={() => navigation.navigate('Home')} />
-    </View>
+    <ViewBoxContain>
+      <ViewBoxStartGame>
+        <ViewBoxTextStartGame>
+          <ImageBoxStartGame source={require('../../images/genius.png')} />
+          <TextBoxStartGame>Welcome to the</TextBoxStartGame>
+          <TextBoxStartGame>Genius Game!</TextBoxStartGame>
+        </ViewBoxTextStartGame>
+        <ButtonDefault
+          title="Start!"
+          onPress={() => {
+            initGame();
+            return navigation.navigate('Home');
+          }}
+        />
+      </ViewBoxStartGame>
+      <TextBoxFootGame>Created By Lucas Bryan</TextBoxFootGame>
+    </ViewBoxContain>
   );
 };
 
